@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação Prezi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .header {
+            margin-bottom: 30px;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .iframe-wrapper {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: inline-block;
+            margin: 20px 0;
+        }
+        
+        .iframe-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+        
+        .controls {
+            margin: 20px 0;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .btn-fullscreen {
+            background: #4CAF50;
+            color: white;
+        }
+        
+        .instructions {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            color: white;
+            max-width: 600px;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 15px;
+        }
+        
+        .instructions ul {
+            text-align: left;
+            list-style-position: inside;
+        }
+        
+        .instructions li {
+            margin-bottom: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .iframe-wrapper {
+                padding: 10px;
+            }
+            
+            iframe {
+                max-width: 100%;
+                height: auto;
+                min-height: 300px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Apresentação Interativa</h1>
+            <p>Assista à apresentação abaixo e explore o conteúdo</p>
+        </div>
+        
+        <div class="iframe-wrapper">
+            <div class="iframe-container">
+                <iframe 
+                    src="https://prezi.com/p/embed/Dnc6EGuHVL5PIGrVk5Yb/" 
+                    id="iframe_container" 
+                    frameborder="0" 
+                    webkitallowfullscreen="" 
+                    mozallowfullscreen="" 
+                    allowfullscreen="" 
+                    allow="autoplay; fullscreen" 
+                    height="315" 
+                    width="560">
+                </iframe>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn btn-fullscreen" onclick="toggleFullscreen()">
+                🖥️ Tela Cheia
+            </button>
+            <button class="btn" onclick="reloadIframe()">
+                🔄 Recarregar
+            </button>
+        </div>
+        
+        <div class="instructions">
+            <h3>Como usar a apresentação:</h3>
+            <ul>
+                <li>Use as setas do teclado para navegar entre os slides</li>
+                <li>Clique e arraste para explorar diferentes áreas</li>
+                <li>Use o zoom com a roda do mouse ou gestos de pinch</li>
+                <li>Clique no botão "Tela Cheia" para uma experiência imersiva</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function toggleFullscreen() {
+            const iframe = document.getElementById('iframe_container');
+            
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        }
+        
+        function reloadIframe() {
+            const iframe = document.getElementById('iframe_container');
+            iframe.src = iframe.src;
+        }
+        
+        // Ajusta o tamanho do iframe baseado na largura da tela
+        function adjustIframeSize() {
+            const iframe = document.getElementById('iframe_container');
+            const container = document.querySelector('.iframe-container');
+            const windowWidth = window.innerWidth;
+            
+            if (windowWidth < 768) {
+                iframe.width = '100%';
+                iframe.height = '300';
+            } else if (windowWidth < 1024) {
+                iframe.width = '800';
+                iframe.height = '450';
+            } else {
+                iframe.width = '560';
+                iframe.height = '315';
+            }
+        }
+        
+        // Ajusta o tamanho quando a janela é redimensionada
+        window.addEventListener('resize', adjustIframeSize);
+        
+        // Ajusta o tamanho inicial
+        window.addEventListener('load', adjustIframeSize);
+    </script>
+</body>
+</html>
