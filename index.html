@@ -5,24 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apresentação Prezi</title>
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background: #f0f0f0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
         
         .iframe-container {
-            position: fixed;
-            top: 0;
-            left: 0;
+            flex: 1;
             width: 100%;
-            height: 100%;
+            height: calc(100vh - 50px);
         }
         
         .iframe-container iframe {
             width: 100%;
             height: 100%;
             border: none;
+        }
+        
+        .footer {
+            background: #000;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer a:hover {
+            color: #4da6ff;
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -36,6 +64,12 @@
             allowfullscreen="" 
             allow="autoplay; fullscreen">
         </iframe>
+    </div>
+    
+    <div class="footer">
+        <a href="https://sloanreview.mit.edu/article/whats-your-edge-rethinking-expertise-in-the-age-of-ai/" target="_blank">
+            Source: https://sloanreview.mit.edu/article/whats-your-edge-rethinking-expertise-in-the-age-of-ai/
+        </a>
     </div>
 </body>
 </html>
